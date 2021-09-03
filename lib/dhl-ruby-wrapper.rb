@@ -11,5 +11,6 @@ module Dhl
   autoload :AuthenticateResource, "dhl/resources/authenticate"
   autoload :DraftsResource, "dhl/resources/drafts"
 
+  autoload :Draft, "dhl/objects/draft"
   autoload :Token, "dhl/objects/token"
 end

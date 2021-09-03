@@ -13,7 +13,7 @@ module Dhl
       DraftsResource.new(self)
     end
 
-    def connection(require_token = true)
+    def connection(require_token: true)
       Faraday.new(base_url) do |conn|
         conn.request :authorization, :Bearer, get_access_token if require_token
         conn.request :json
