@@ -1,31 +1,32 @@
 module Dhl
   class Resource
-    attr_reader :client
+    attr_reader :client, :require_token
 
-    def initialize(client)
+    def initialize(client, require_token: true)
       @client = client
+      @require_token = require_token
     end
 
     private
 
     def get_request(url, params: {}, headers: {})
-      handle_response client.connection.get(url, params, headers)
+      handle_response client.connection(require_token).get(url, params, headers)
     end
 
     def post_request(url, body:, headers: {})
-      handle_response client.connection.post(url, body, headers)
+      handle_response client.connection(require_token).post(url, body, headers)
     end
 
     def patch_request(url, body:, headers: {})
-      handle_response client.connection.patch(url, body, headers)
+      handle_response client.connection(require_token).patch(url, body, headers)
     end
 
     def put_request(url, body:, headers: {})
-      handle_response client.connection.put(url, body, headers)
+      handle_response client.connection(require_token).put(url, body, headers)
     end
 
     def delete_request(url, params: {}, headers: {})
-      handle_response client.connection.delete(url, params, headers)
+      handle_response client.connection(require_token).delete(url, params, headers)
     end
 
     def handle_response(response)
